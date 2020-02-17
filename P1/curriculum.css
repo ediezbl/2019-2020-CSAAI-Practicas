@@ -1,0 +1,16 @@
+/* CSS by Eduardo Diez Blanco */
+body {
+  background-image: url("ironmaiden.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#centrar {
+   position: absolute;
+   left: 50%;
+   margin-left: -300px;
+   top: 50%;
+   margin-top: -300px;
+   width: 300;
+   font-size: 250%;
+}
