@@ -1,9 +1,11 @@
 /* CSS by Eduardo Diez Blanco */
 body {
+
   background-image: url("ironmaiden.jpg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size:contain;
+  background-color: black;
 }
 #centrar {
    position: absolute;
@@ -13,4 +15,25 @@ body {
    margin-top: -300px;
    width: 300;
    font-size: 250%;
+   font-style: italic;;
+   color: purple;
+}
+.encabezados {
+  margin: 0px;
+ padding: 10px; /* Relleno */
+ border:solid;
+ border-color: purple;
+ text-align: center;
+ font-style:italic;
+ color:purple;
+}
+p {
+  color: red;
+  font-size: 200%;
+}
+ul {
+  text-align: center;
+  list-style: none;
+  font-size: 125%;
+  color:red;
 }
