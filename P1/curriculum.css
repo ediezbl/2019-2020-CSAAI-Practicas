@@ -11,10 +11,10 @@ body {
    position: absolute;
    left: 50%;
    margin-left: -300px;
-   top: 50%;
+   top: 40%;
    margin-top: -300px;
    width: 300;
-   font-size: 250%;
+   font-size: 200%;
    font-style: italic;;
    color: purple;
 }
