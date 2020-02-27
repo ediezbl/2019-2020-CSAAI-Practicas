@@ -10,26 +10,48 @@ function cleanDisplay(calc){
   calc.operacion = null;
   calc.resultado = null;
 }
-
-function operar(calc){
-  // Funcion para indicar operaciones se van a realizar
+function operarIguales(calc){
+  // Cuando op1 y op2 son iguales
+  switch(calc.operacion){
+    case "+":
+      calc.resultado = Number(calc.op1) + Number(calc.op1);
+    break;
+    case "-":
+      calc.resultado = Number(calc.op1) - Number(calc.op1);
+    break;
+    case "x":
+      calc.resultado = Number(calc.op1) * Number(calc.op1);
+    break;
+    case "/":
+      calc.resultado = Number(calc.op1) / Number(calc.op1);
+    break;
+  }
+  calc.display.innerHTML = calc.resultado;
+}
+function operando(calc){
+  //Operando la calculadora
   switch(calc.operacion){
     case "+":
       calc.resultado = Number(calc.op1) + Number(calc.op2);
-      calc.display.innerHTML = calc.resultado;
     break;
     case "-":
         calc.resultado = Number(calc.op1) - Number(calc.op2);
-        calc.display.innerHTML = calc.resultado;
     break;
     case "x":
       calc.resultado = Number(calc.op1) * Number(calc.op2);
-      calc.display.innerHTML = calc.resultado;
     break;
     case "/":
       calc.resultado = Number(calc.op1) / Number(calc.op2);
-      calc.display.innerHTML = calc.resultado;
     break;
+  }
+  calc.display.innerHTML = calc.resultado;
+}
+function operar(calc){
+  // Funcion para indicar operaciones se van a realizar
+  if(calc.op2 == ""){
+    operarIguales(calc);
+  } else {
+    operando(calc);
   }
 }
 function accionBotones(value, calc){
@@ -42,7 +64,7 @@ function accionBotones(value, calc){
     case "x":
     case "+":
     case "-":
-      if(calc.display.innerHTML == 0){
+      if(calc.display.innerHTML == "0"){
         alert("Primero introduce un numero");
         cleanDisplay(calc);
       } else {
@@ -53,7 +75,7 @@ function accionBotones(value, calc){
       }
       break;
       case "=":
-        if(calc.display.innerHTML == 0){
+        if(calc.display.innerHTML == "0"){
           alert("Primero introduce un numero");
           cleanDisplay(calc);
         } else {
@@ -80,7 +102,6 @@ function clickButtons(calc){
   }
   function main(){
     var calc = {
-      // display
       display: document.getElementById("display"),
       botones: document.getElementsByClassName("button"),
       op1: null,
