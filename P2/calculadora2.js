@@ -5,7 +5,7 @@ function cleanDisplay(calc){
   //Limpia el display
   calc.display.innerHTML = "0";
   //Aqui limpiaré los operadores
-  calc.op1 = null,
+  calc.op1 = null;
   calc.op2 = null;
   calc.operacion = null;
   calc.resultado = null;
