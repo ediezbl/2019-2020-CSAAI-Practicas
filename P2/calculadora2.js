@@ -21,7 +21,6 @@ function operar(calc){
     case "-":
         calc.resultado = Number(calc.op1) - Number(calc.op2);
         calc.display.innerHTML = calc.resultado;
-      }
     break;
     case "x":
       calc.resultado = Number(calc.op1) * Number(calc.op2);
