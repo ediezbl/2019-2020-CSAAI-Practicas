@@ -1,12 +1,18 @@
 /* CSS by Eduardo Diez Blanco */
 
-
-body {
+body{
+  background-color: black;
+}
+div {
+  margin-top: 150px;
+  background-color: black;
   width: 600px;
   height: 300px;
-  border: 1px solid black;
+  border: 1px solid red;
   box-sizing: border-box;
-  margin-left: 300px;
+  margin-left: 400px;
+  background-color: green;
+  color: red;
 }
 
 button {
@@ -22,7 +28,13 @@ button {
  p {
    width: 300px;
    height: 40px;
-   border: 1px solid black;
+   border: 1px solid red;
    box-sizing: border-box;
-   margin-left: 300px
+   margin-left: 300px;
+   margin-right: 100px;
+   background-color: black;
  }
+h1 {
+  text-align: center;
+  color: red;
+}
