@@ -36,7 +36,7 @@ ctx.lineTo(canvas.width/2, canvas.height);
 ctx.stroke();
 
 // Dibujar el marcador
-ctx.font = "100px Arial";
-ctx.fillStyle = "white";
-ctx.fillText("0", 200, 80);
-ctx.fillText("0", 340, 80);
+ctx.font = "100px Arial"; // Tamaño de la fuente
+ctx.fillStyle = "white"; // Estilo de la letra
+ctx.fillText("0", 200, 80); // posicion izquierda
+ctx.fillText("0", 340, 80); // posicion derecha 
