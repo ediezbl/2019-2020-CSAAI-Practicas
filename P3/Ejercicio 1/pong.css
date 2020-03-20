@@ -1,0 +1,11 @@
+
+/* Fondo de la pagina*/
+/* Es diferente para que se parezca más al juego de los 70 */
+
+body{
+  background-color: black;
+}
+
+#canvas {
+  background-color: black;
+}
