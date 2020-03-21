@@ -33,21 +33,20 @@ function animacion(){
   // Actualiza la velocidad de la raqueta
   raqI.update();
   raqD.update();
-  if(bola.x >= canvas.width || bola.x <= 0){
+  // Dentro de la funcion comprobar rebotes (depuracion)
+  if(bola.x >= canvas.width){
+    bola.init();
+    marcador_J1 += 1;
+  } else if (bola.x <= 0) {
+    bola.init();
     bola.vx = bola.vx * -1;
+    marcador_J2 += 1;
   }
   if(bola.y >= canvas.height || bola.y <= 0){
     bola.vy = bola.vy * -1;
   }
-  if (bola.x >= canvas.width){
-    marcador_J1 += 1;
-    bola.init();
-  }
-  if (bola.x <= 0){
-    marcador_J2 += 1;
-    bola.init();
-  }
   // Comprobar si hay colision raqueta izqda + drcha
+  // Dentro de la funcion comprobar rebotes (depuracion )
   if(bola.x >= raqI.x && bola.x <= (raqI.x + raqI.width) &&
       bola.y >= raqI.y && bola.y <= (raqI.y + raqI.height)){
             bola.vx = bola.vx * -1;
