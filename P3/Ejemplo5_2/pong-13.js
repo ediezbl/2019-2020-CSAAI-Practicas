@@ -21,6 +21,37 @@ const raqI = {
   v_ini: 3, // velocidad inicial
   v : 0 // velocidad variable
 }
+function bola_draw(){
+  //Dibuja la bola
+  ctx.beginPath();
+  ctx.fillStyle = "white";
+  ctx.rect(bola.x, bola.y, bola.size, bola.size);
+  ctx.fill();
+}
+function bola_init(){
+  // Bola a su posicion inicial
+  bola.x = bola.x_ini;
+  bola.y = bola.y_ini;
+  bola.vx = bola.vx_ini;
+  bola.vy = bola.vy_ini;
+}
+function bola_update(){
+  bola.x += bola.vx;
+  bola.y += bola.vy;
+}
+function raqI_init(){
+  raqI.x = raqI.x_ini;
+  raqI.y = raqI.y_ini;
+}
+function raqI_update(){
+  raqI.y += raqI.v;
+}
+function raqI_draw(){
+  ctx.beginPath();
+  ctx.fillStyle = "white";
+  ctx.rect(raqI.x, raqI.y, raqI.width, raqI.height);
+  ctx.fill();
+}
 // Rebote en la pared izquierda
 // Pintar elementos en el canvas
 console.log('Ejecutando JS...');
@@ -31,20 +62,10 @@ const ctx = canvas.getContext("2d");
 
 var audio = document.getElementById("audio");
 function draw(){
- // Dibujo la bola
-  ctx.beginPath(); // Para empezar a dibujar
-  ctx.fillStyle = 'white'; // Define el color que va a tener la bolita
-  //  En este orden x, y, anchura y altura
-  // ctx.rect es una funcion que dibujara el cuadrado que hace de bolita
-  ctx.rect(bola.x, bola.y, bola.size, bola.size);
-  ctx.fill(); // Junta todo y dibuja
-
-  //Dibujando las raquetas
-  ctx.beginPath(); //Para empezar a dibujar de nuevo
-
-  // Como son rectangulos todas se van a dibujar con ctx.rect
-  // x, y , anchura y altura
-  ctx.rect(raqI.x, raqI.y, raqI.width, raqI.height); // Izquierda
+  bola_draw();
+  raqI_draw();
+  ctx.beginPath();
+  ctx.fillStyle = 'white';
   ctx.rect(550, 300, 10, 40); // Derecha
 
   // Pintar todo de nuevo
@@ -72,9 +93,7 @@ function draw(){
 function animacion(){
   // Meter la variable bola_x en animacion es lo que hace
   // que haya animacion ya que funciona en "bucle"
-  bola.x += bola.vx;
-  bola.y += bola.vy;
-  raqI.y += raqI.v;
+  raqI_update();
   // Establecer una condicion para cuando la bola_x
   // sea mayor que la anchura del canvas esta misma rebote
   // Rebote en la raqueta izqda
@@ -96,19 +115,15 @@ if(bola.x >= raqI.x && bola.x <= (raqI.x + 10)
   if(raqI.y >= canvas.height || raqI.y <= 0){
     raqI.y = raqI.y_ini;
   }
+  bola_update();
   // Para animar hay que borrar el canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   //LLamar a la funcion draw para dibujar el siguiente frame
   draw();
 
 }
-// Inicializar la bola a la posicion inicial
-bola.x = bola.x_ini;
-bola.y = bola.y_ini;
-// Inicializar la raqueta a su posicion inicial
-raqI.x = raqI.x_ini;
-raqI.y = raqI.y_ini;
-
+bola_init();
+raqI_init();
 // Repetir la funcion de animacion cada cierto tiempo
 // con la funcion setInterval
 setInterval(() => {
@@ -122,10 +137,7 @@ window.onkeydown = (e) => {
   // de momento solo para el espacio
   switch (e.key) {
     case " ":
-    bola.x = bola.x_ini;
-    bola.y = bola.y_ini;
-    bola.vx = bola.vx_ini;
-    bola.vy = bola.vy_ini;
+    bola_init();
     break;
     case "a":
     raqI.v = raqI.v_ini;
