@@ -13,17 +13,32 @@ function getRandomInt(min, max){
   // y en la posicion inicial al inicial el juego
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+function randomAplication (){
+  // valores random despues de marcar el punto
+  bola.x = getRandomInt(100, 200);
+  bola.y = getRandomInt(200, 300);
+  bola.vy = getRandomInt(-3, 3);
+  bola.init();
+  punto.play();
+}
+function valRebote () {
+  // Valores que va a haber despues de un rebote
+  bola.vx = bola.vx * -1;
+  bola.vy = getRandomInt(-3, 3);
+  rebote.play();
+}
+function valRebote_y () {
+  bola.vy = bola.vy * -1;
+  rebote.play();
+}
 function Punto () {
   // Que pasa cada vez que se marca un punto
   if(bola.x >= canvas.width){
-    bola.init();
+    randomAplication();
     marcador_J1 += 1;
-    punto.play();
   } else if (bola.x <= 0) {
-    bola.init();
-    bola.vx = bola.vx * -1;
+    randomAplication();
     marcador_J2 += 1;
-    punto.play();
   }
 }
 function RaqLimite (){
@@ -43,22 +58,17 @@ function RaqLimite (){
 function Rebotes () {
   // rebote de la pelota
   if(bola.y >= canvas.height || bola.y <= 0){
-    bola.vy = bola.vy * -1;
-    rebote.play();
+    valRebote_y();
   }
   // Comprobar si hay colision raqueta izqda + drcha
   // Dentro de la funcion comprobar rebotes (depuracion )
   if(bola.x >= raqI.x && bola.x <= (raqI.x + raqI.width) &&
       bola.y >= raqI.y && bola.y <= (raqI.y + raqI.height)){
-            bola.vx = bola.vx * -1;
-            bola.vy = getRandomInt(-3, 3);
-            rebote.play();
+          valRebote();
           }
   if(bola.x >= raqD.x && bola.x <= (raqD.x + raqD.width)&&
      bola.y >= raqD.y && bola.y <= (raqD.y + raqD.height)){
-       bola.vx = bola.vx * -1;
-       bola.vy = getRandomInt(-3, 3);
-       rebote.play();
+       valRebote();
      }
 }
 function Key_Control () {
@@ -77,9 +87,11 @@ function Key_Control () {
       raqD.v = raqD.v_ini;
       break;
       case " ":
+      bola.x = getRandomInt(100, 180);
+      bola.y = getRandomInt(200, 280);
       bola.init();
       bola.vx = bola.vx_ini;
-      bola.vy = bola.vy_ini;
+      bola.vy = getRandomInt(-3, 3);
     }
   }
   // Retrollamada de las teclas cuando dejan de ser pulsadas
