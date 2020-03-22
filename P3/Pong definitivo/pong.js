@@ -38,6 +38,7 @@ function Punto () {
     marcador_J1 += 1;
   } else if (bola.x <= 0) {
     randomAplication();
+    bola.vx = bola.vx * -1;
     marcador_J2 += 1;
   }
 }
