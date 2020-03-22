@@ -6,7 +6,8 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 var marcador_J1 = 0;
 var marcador_J2 = 0;
-
+var rebote = document.getElementById("rebote");
+var punto = document.getElementById("punto");
 function getRandomInt(min, max){
   // Numero aleatorio que usare en la velocidad
   // y en la posicion inicial al inicial el juego
@@ -17,16 +18,33 @@ function Punto () {
   if(bola.x >= canvas.width){
     bola.init();
     marcador_J1 += 1;
+    punto.play();
   } else if (bola.x <= 0) {
     bola.init();
     bola.vx = bola.vx * -1;
     marcador_J2 += 1;
+    punto.play();
   }
 }
+function RaqLimite (){
+  // Para que las raquetas no se salgan del canvas
+    if(raqI.y >= 346){
+      raqI.y = 346;
+    } else if (raqI.y <= 0){
+      raqI.y = 0;
+    }
+    if(raqD.y >= 357){
+      raqD.y = 357;
+    } else if (raqD.y <= 0){
+      raqD.y = 0;
+    }
+  }
+
 function Rebotes () {
   // rebote de la pelota
   if(bola.y >= canvas.height || bola.y <= 0){
     bola.vy = bola.vy * -1;
+    rebote.play();
   }
   // Comprobar si hay colision raqueta izqda + drcha
   // Dentro de la funcion comprobar rebotes (depuracion )
@@ -34,11 +52,13 @@ function Rebotes () {
       bola.y >= raqI.y && bola.y <= (raqI.y + raqI.height)){
             bola.vx = bola.vx * -1;
             bola.vy = getRandomInt(-3, 3);
+            rebote.play();
           }
-  if(bola.x >= raqD.x && bola.x <= (raqD.x + raqI.width)&&
+  if(bola.x >= raqD.x && bola.x <= (raqD.x + raqD.width)&&
      bola.y >= raqD.y && bola.y <= (raqD.y + raqD.height)){
        bola.vx = bola.vx * -1;
        bola.vy = getRandomInt(-3, 3);
+       rebote.play();
      }
 }
 function Key_Control () {
@@ -51,10 +71,10 @@ function Key_Control () {
       raqI.v = raqI.v_ini * -1;
       break;
       case "p":
-      raqD.v = raqD.v_ini;
+      raqD.v = raqD.v_ini * -1;
       break;
       case "l":
-      raqD.v = raqD.v_ini * -1;
+      raqD.v = raqD.v_ini;
       break;
       case " ":
       bola.init();
@@ -101,6 +121,7 @@ function animacion(){
   raqD.update();
   Punto();
   Rebotes();
+  RaqLimite();
   //Actualizar la velocidad de la bola
   bola.update();
   // Borrar la pantalla
