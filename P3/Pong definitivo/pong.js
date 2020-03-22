@@ -17,14 +17,14 @@ function randomAplication (){
   // valores random despues de marcar el punto
   bola.x = getRandomInt(100, 200);
   bola.y = getRandomInt(200, 300);
-  bola.vy = getRandomInt(-3, 3);
+  bola.vy = getRandomInt(-2, 2);
   bola.init();
   punto.play();
 }
 function valRebote () {
   // Valores que va a haber despues de un rebote
   bola.vx = bola.vx * -1;
-  bola.vy = getRandomInt(-3, 3);
+  bola.vy = getRandomInt(-2, 2);
   rebote.play();
 }
 function valRebote_y () {
@@ -88,11 +88,8 @@ function Key_Control () {
       raqD.v = raqD.v_ini;
       break;
       case " ":
-      bola.x = getRandomInt(100, 180);
-      bola.y = getRandomInt(200, 280);
-      bola.init();
+      randomAplication();
       bola.vx = bola.vx_ini;
-      bola.vy = getRandomInt(-3, 3);
     }
   }
   // Retrollamada de las teclas cuando dejan de ser pulsadas
