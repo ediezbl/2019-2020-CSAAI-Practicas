@@ -25,3 +25,21 @@ video4.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente3.mp4";
 var boton1 = document.getElementById("boton1");
 var boton2 = document.getElementById("boton2");
 var boton3 = document.getElementById("boton3");
+
+boton1.onclick = () => {
+  video1.src = video2.src;
+  video1.currentTime = video2.currentTime;
+  video1.play();
+};
+
+boton2.onclick = () => {
+  video1.src = video3.src;
+  video1.currentTime = video3.currentTime;
+  video1.play();
+}
+
+boton3.onclick = () => {
+  video1.src = video3.src;
+  video1.currentTime = video3.currentTime;
+  video1.play();
+}
