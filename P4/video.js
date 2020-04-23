@@ -1,29 +1,27 @@
 console.log("Ejecutando JS...");
 
 //----- Obtener elemento de video y configurarlo
-const video1 = document.getElementById("video1")
-video1.width=200;  //-- Tamaño de la pantalla de video
-video1.height=100;
+var video1 = document.getElementById("video1")
+video1.width=600;  //-- Tamaño de la pantalla de video
+video1.height=300;
+video1.poster = "barras.png"
 
-//-- Imagen estática a mostrar cuando el video no
-//-- ha arrancado
-video1.poster="barras.png"
-//-- Obtener los botones
-const play = document.getElementById("play")
-const stop = document.getElementById("stop")
+var video2 = document.getElementById("video2");
+video2.width = 200;
+video2.height = 100;
+video2.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente1.mp4";
 
-//-- Función de retrollamada del botón de ver
-play.onclick = () => {
-  console.log("Click!");
-  video1.src="https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente1.mp4";
-  video1.play();
-};
 
-//-- Funcion de retrollamada del boton de parar
-stop.onclick = () => {
-  video1.pause();
+var video3 = document.getElementById("video3");
+video3.width = 200;
+video3.height = 100;
+video3.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente2.mp4";
 
-  //-- Quitar la fuente de video, para que se muestre la
-  //-- imagen definida en el atributo poster
-  video1.src = null;
-}
+var video4 = document.getElementById("video4");
+video4.width = 200;
+video4.height = 100;
+video4.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente3.mp4";
+
+var boton1 = document.getElementById("boton1");
+var boton2 = document.getElementById("boton2");
+var boton3 = document.getElementById("boton3");
