@@ -7,8 +7,7 @@ video1.height=100;
 
 //-- Imagen estática a mostrar cuando el video no
 //-- ha arrancado
-video1.poster="https://github.com/myTeachingURJC/2019-2020-CSAAI/raw/master/L10/test.png";
-
+video1.poster="barras.png"
 //-- Obtener los botones
 const play = document.getElementById("play")
 const stop = document.getElementById("stop")
@@ -16,7 +15,7 @@ const stop = document.getElementById("stop")
 //-- Función de retrollamada del botón de ver
 play.onclick = () => {
   console.log("Click!");
-  video1.src="https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente1.mp4"
+  video1.src="https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente1.mp4";
   video1.play();
 };
 
@@ -26,5 +25,5 @@ stop.onclick = () => {
 
   //-- Quitar la fuente de video, para que se muestre la
   //-- imagen definida en el atributo poster
-  video1.src=null;
+  video1.src = null;
 }
