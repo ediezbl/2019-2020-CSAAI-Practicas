@@ -13,7 +13,6 @@ var boton2 = document.getElementById("boton2");
 var boton3 = document.getElementById("boton3");
 var auto = document.getElementById("auto");
 var normal = document.getElementById("normal");
-var stop = document.getElementById("stop");
 var  inicio = false;
 var num_vid = 1;
 // funcion para obtener los parametros del video
@@ -23,11 +22,24 @@ function video_Parameters (video, width, height) {
   if(video == video1){
     video.poster = "barras.png";
   } else if (video == video2){
-    video.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente1.mp4";
+    video.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente1.mp4" + "#t=0,10";
   } else if (video == video3){
-    video.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente2.mp4";
+    video.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente2.mp4" + "#t=0,10";
   } else {
-    video.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente3.mp4";
+    video.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente3.mp4" + "#t=0,10";
+  }
+}
+
+function update_videos(video1,video2){
+  video1.src = video2.src;
+  video1.currentTime = video2.currentTime;
+  video1.play();
+}
+function restart_videos(video1,video2){
+  if(video1.src == ""){
+    video1.src = video2.src;
+    video1.currentTime = video2.currentTime;
+    video1.play();
   }
 }
 
@@ -35,9 +47,7 @@ function video_Parameters (video, width, height) {
 function click_Botton(boton, video1, video2){
   boton.onclick = () => {
       if(inicio == true){
-        video1.src = video2.src;
-        video1.currentTime = video2.currentTime;
-        video1.play();
+        restart_videos(video1,video2);
       }
   };
 }
@@ -49,39 +59,34 @@ video_Parameters(video4, 200, 100);
 
 function automatico(video1,video2,video3,video4){
     if(num_vid == 1){
-      video1.src = video2.src;
-      video1.currentTime = video2.currentTime;
-      video1.play();
+      update_videos(video1,video2);
       num_vid += 1;
     } else if (num_vid == 2){
-      video1.src = video3.src;
-      video1.currentTime = video3.currentTime;
-      video1.play();
+      update_videos(video1,video3);
       num_vid += 1;
     } else {
-      video1.src = video4.src;
-      video1.currentTime = video4.currentTime;
-      video1.play();
+      update_videos(video1,video4);
+      num_vid = 1;
     }
   }
 
 auto.onclick = () => {
-  inicio = false;
-  automatico(video1,video2,video3,video4);
-  window.setInterval('automatico(video1,video2,video3,video4)',2000);
+  if(inicio == false){
+    automatico(video1,video2,video3,video4);
+    var win = setInterval(function() {automatico(video1,video2,video3,video4)},2000);
+  } else {
+    console.log(inicio);
+    clearInterval(win);
+    video1.src = "";
+  }
 };
+
 normal.onclick = () => {
-  video1.play();
+  inicio = true;
+  video1.src = "";
   video2.play();
   video3.play();
-  inicio = true;
-};
-stop.onclick = () => {
-  video2.pause();
-  video3.pause();
-  video4.pause();
-  video1.currentTime = 0;
-  video1.src = null;
+  video4.play();
 };
 
 click_Botton(boton1,video1,video2);
