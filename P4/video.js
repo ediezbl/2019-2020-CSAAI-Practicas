@@ -73,9 +73,9 @@ function automatico(video1,video2,video3,video4){
 auto.onclick = () => {
   if(inicio == false){
     automatico(video1,video2,video3,video4);
-    var win = setInterval(function() {automatico(video1,video2,video3,video4)},2000);
+    win = setInterval(function() {automatico(video1,video2,video3,video4)},2000);
   } else {
-    console.log(inicio);
+    console.log(normalState);
     clearInterval(win);
     video1.src = "";
   }
