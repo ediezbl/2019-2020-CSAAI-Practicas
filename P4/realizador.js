@@ -16,6 +16,7 @@ var normalState = false;
 var num_vid = 1;
 var win;
 var modeLoop = false;
+
 // funciones
 function obtain_video_parameters(video, width, height){
   video.width = width;
@@ -41,9 +42,6 @@ function click_Botton(boton, video1, video2){
   boton.onclick = () => {
     if(normalState == true){
       update_videos(video1,video2);
-      if(modeLoop == true){
-        video1.loop = true;
-      }
     }
   };
 }
