@@ -15,6 +15,7 @@ var auto = document.getElementById("auto");
 var normal = document.getElementById("normal");
 var  inicio = false;
 var num_vid = 1;
+
 // funcion para obtener los parametros del video
 function video_Parameters (video, width, height) {
   video.width = width;
