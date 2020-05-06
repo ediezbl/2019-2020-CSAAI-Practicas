@@ -4,11 +4,13 @@ const video1 = document.getElementById("video1");
 const video2 = document.getElementById("video2");
 const video3 = document.getElementById("video3");
 const video4 = document.getElementById("video4");
+const video5 = document.getElementById("video5");
 
 // botones
 const boton1 = document.getElementById("boton1");
 const boton2 = document.getElementById("boton2");
 const boton3 = document.getElementById("boton3");
+const boton4 = document.getElementById("boton4");
 const normal = document.getElementById("normal");
 const auto = document.getElementById("auto");
 const loop = document.getElementById("loop");
@@ -17,6 +19,7 @@ const noLoop = document.getElementById("noloop");
 // variables
 var normalState = false;
 var modeLoop = false;
+var pruebas = false;
 var num_vid = 1;
 var auto_interval;
 var loop_interval;
@@ -31,8 +34,10 @@ function obtain_video_parameters(video, width, height){
     video.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente1.mp4" + "#t=0,10";
   } else if (video == video3){
     video.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente2.mp4" + "#t=0,10";
-  } else {
+  } else if (video == video4){
     video.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente3.mp4" + "#t=0,10";
+  } else {
+    video.poster = "https://github.com/myTeachingURJC/2019-2020-CSAAI/raw/master/L10/test.png";
   }
 }
 
@@ -101,30 +106,49 @@ function noLooplogic(){
   }
 }
 
+function restartPoster(){
+  pruebas = false;
+  if(pruebas == false){
+    video1.poster = "barras.png"
+  }
+}
+
+function newPoster(){
+  pruebas = true;
+  if(pruebas == true){
+    video1.poster = video5.poster;
+  }
+}
+
 function botones(){
   click_Botton(boton1, video1, video2);
   click_Botton(boton2, video1, video3);
   click_Botton(boton3, video1, video4);
-
   normal.onclick = () => {
+    restartPoster();
     normalLogic();
   };
-
   auto.onclick = () => {
+    restartPoster();
     autoLogic();
   };
-
   loop.onclick = () => {
+    restartPoster();
     loopLogic();
   };
-
   noLoop.onclick = () => {
+    restartPoster();
     noLooplogic();
   };
-}
+  boton4.onclick = () => {
+    newPoster();
+  }
+};
+
 // Programa principal
 obtain_video_parameters(video1, 600, 300);
 obtain_video_parameters(video2, 200, 100);
 obtain_video_parameters(video3, 200, 100);
 obtain_video_parameters(video4, 200, 100);
+obtain_video_parameters(video5, 200, 100);
 botones();
