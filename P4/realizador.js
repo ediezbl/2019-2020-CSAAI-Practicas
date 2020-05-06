@@ -4,6 +4,7 @@ const video1 = document.getElementById("video1");
 const video2 = document.getElementById("video2");
 const video3 = document.getElementById("video3");
 const video4 = document.getElementById("video4");
+
 // botones
 const boton1 = document.getElementById("boton1");
 const boton2 = document.getElementById("boton2");
@@ -11,11 +12,14 @@ const boton3 = document.getElementById("boton3");
 const normal = document.getElementById("normal");
 const auto = document.getElementById("auto");
 const loop = document.getElementById("loop");
+const noLoop = document.getElementById("noloop");
+
 // variables
 var normalState = false;
-var num_vid = 1;
-var win;
 var modeLoop = false;
+var num_vid = 1;
+var auto_interval;
+var loop_interval;
 
 // funciones
 function obtain_video_parameters(video, width, height){
@@ -59,6 +63,12 @@ function automatico(){
     }
   }
 
+function loopLogic() {
+    if (video1.currentTime > 5){
+        video1.currentTime = 0;
+      }
+}
+
 // Programa principal
 obtain_video_parameters(video1, 600, 300);
 obtain_video_parameters(video2, 200, 100);
@@ -70,8 +80,8 @@ click_Botton(boton2, video1, video3);
 click_Botton(boton3, video1, video4);
 
 normal.onclick = () => {
-  if(win != undefined){
-    clearInterval(win);
+  if(auto_interval != undefined){
+    clearInterval(auto_interval);
     video1.src = null;
   }
   video2.play();
@@ -83,8 +93,20 @@ normal.onclick = () => {
 auto.onclick = () => {
   modeAuto = !normalState
   if(modeAuto){
-    win = setInterval(function() {automatico()},2000);
+    auto_interval = setInterval(function() {automatico()},2000);
     normalState = true;
     console.log(normalState);
+  }
+};
+
+loop.onclick = () => {
+  modeLoop = true;
+  loop_interval = setInterval(function() {loopLogic()},20);
+};
+
+noLoop.onclick = () => {
+  modeLoop = false;
+  if(loop_interval != undefined){
+    clearInterval(loop_interval);
   }
 };
