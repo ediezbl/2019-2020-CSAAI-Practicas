@@ -63,23 +63,13 @@ function automatico(){
     }
   }
 
-function loopLogic() {
+function bucle() {
     if (video1.currentTime > 5){
         video1.currentTime = 0;
       }
 }
 
-// Programa principal
-obtain_video_parameters(video1, 600, 300);
-obtain_video_parameters(video2, 200, 100);
-obtain_video_parameters(video3, 200, 100);
-obtain_video_parameters(video4, 200, 100);
-
-click_Botton(boton1, video1, video2);
-click_Botton(boton2, video1, video3);
-click_Botton(boton3, video1, video4);
-
-normal.onclick = () => {
+function normalLogic() {
   if(auto_interval != undefined){
     clearInterval(auto_interval);
     video1.src = null;
@@ -88,25 +78,53 @@ normal.onclick = () => {
   video3.play();
   video4.play();
   normalState = true;
-};
+}
 
-auto.onclick = () => {
+function autoLogic(){
   modeAuto = !normalState
   if(modeAuto){
     auto_interval = setInterval(function() {automatico()},2000);
     normalState = true;
     console.log(normalState);
   }
-};
+}
 
-loop.onclick = () => {
+function loopLogic() {
   modeLoop = true;
-  loop_interval = setInterval(function() {loopLogic()},20);
-};
+  loop_interval = setInterval(function() {bucle()},20);
+}
 
-noLoop.onclick = () => {
+function noLooplogic(){
   modeLoop = false;
   if(loop_interval != undefined){
     clearInterval(loop_interval);
   }
-};
+}
+
+function botones(){
+  click_Botton(boton1, video1, video2);
+  click_Botton(boton2, video1, video3);
+  click_Botton(boton3, video1, video4);
+
+  normal.onclick = () => {
+    normalLogic();
+  };
+
+  auto.onclick = () => {
+    autoLogic();
+  };
+
+  loop.onclick = () => {
+    loopLogic();
+  };
+
+  noLoop.onclick = () => {
+    noLooplogic();
+  };
+}
+// Programa principal
+obtain_video_parameters(video1, 600, 300);
+obtain_video_parameters(video2, 200, 100);
+obtain_video_parameters(video3, 200, 100);
+obtain_video_parameters(video4, 200, 100);
+botones();
