@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Filtro</title>
+    <link rel="stylesheet" href="filtro.css">
+    <script src = "filtro.js" defer></script>
+  </head>
+  <body>
+    <p>Imagen original</p>
+    <img src="wacken.jpg" alt="wacken" id = "imagesrc">
+    <p>Imagen Manipulada</p>
+    <canvas id="canvas"></canvas>
+    <p>Umbral rojo</p>
+    <input type="range" id = "deslizadorRojo" min = "0" max = "255" value= "255">
+    <p id = "range_value_Rojo" >0</p>
+    <br>
+    <p>Umbral verde</p>
+    <input type="range" id = "deslizadorVerde" min = "0" max = "255" value= "255">
+    <p id = "range_value_Verde" >0</p>
+    <p>Umbral azul</p>
+    <input type="range" id = "deslizadorAzul" min = "0" max = "255" value= "255">
+    <p id = "range_value_Azul" >0</p>
+  </body>
+</html>
