@@ -19,10 +19,37 @@ const range_value_Azul = document.getElementById("range_value_Azul");
 
 // variables
 var colores = false;
-var grises = false;
 var img = null;
 
 // funciones
+function loadImage(src, imagen){
+  imagen.onload = function () {
+    if(imagen == "imagen1"){
+      canvas.width = img1.width;
+      canvas.height = img1.height;
+      console.log("Imagen lista...");
+    } else {
+      img2.width = img1.width - 40;
+      img2.height = img2.height - 40;
+      canvas.width = img1.width;
+      canvas.height = img1.width;
+      console.log("imagen lista...");
+    }
+  };
+}
+
+function elegirImagen(boton,src){
+  boton.onclick = () => {
+    if(src == "izquierda"){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      img = img1;
+      ctx.drawImage(img, 0, 0);
+    } else {
+      img = img2;
+      ctx.drawImage(img, 0, 0);
+    }
+  };
+}
 function filtroRojo(data){
   for (let i = 0; i < data.length; i+=4) {
     if (data[i] > umbral){
@@ -98,31 +125,10 @@ function deslizador(color, deslizador, range_value){
       };
 }
 
-img1.onload = function () {
-  canvas.width = img1.width;
-  canvas.height = img1.height;
-  console.log("Imagen lista...");
-};
-
-img2.onload = function () {
-  img2.width = img1.width - 50;
-  img2.height = img2.height - 50;
-  canvas.width = img1.width;
-  canvas.height = img1.width;
-  console.log("imagen lista...");
-};
-
-izquierda.onclick = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    img = img1;
-    ctx.drawImage(img, 0, 0);
-};
-
-derecha.onclick = () => {
-    img = img2;
-    ctx.drawImage(img, 0, 0);
-};
-
+ loadImage("imagen1", img1);
+ loadImage("imagen2", img2);
+ elegirImagen(izquierda, "izquierda");
+ elegirImagen(derecha, "derecha");
 color.onclick = () => {
     colores = true;
     ctx.drawImage(img, 0,0);
@@ -132,9 +138,8 @@ color.onclick = () => {
   };
 
 gris.onclick = () => {
-  grises = true;
   colores = false;
-  if(grises){
+  if(!colores){
     filtroGris();
   }
 };
