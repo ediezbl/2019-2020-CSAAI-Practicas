@@ -3,11 +3,14 @@ console.log("Ejecutando JS....");
 
 // constantes
 const canvas = document.getElementById('canvas');
-const img = document.getElementById('imagesrc');
+const img1 = document.getElementById("imagesrc");
+const img2 = document.getElementById("imagesrc2");
 const ctx = canvas.getContext('2d');
 const deslizadorRojo = document.getElementById('deslizadorRojo');
 const deslizadorVerde = document.getElementById("deslizadorVerde");
 const deslizadorAzul = document.getElementById("deslizadorAzul");
+const izquierda = document.getElementById("izquierda");
+const derecha = document.getElementById("derecha");
 const color = document.getElementById("colores");
 const gris = document.getElementById("grises");
 const range_value_Rojo = document.getElementById('range_value_Rojo');
@@ -17,6 +20,7 @@ const range_value_Azul = document.getElementById("range_value_Azul");
 // variables
 var colores = false;
 var grises = false;
+var img = null;
 
 // funciones
 function filtroRojo(data){
@@ -94,12 +98,29 @@ function deslizador(color, deslizador, range_value){
       };
 }
 
-img.onload = function () {
-  canvas.width = img.width;
-  canvas.height = img.height;
-  ctx.drawImage(img, 0,0);
-
+img1.onload = function () {
+  canvas.width = img1.width;
+  canvas.height = img1.height;
   console.log("Imagen lista...");
+};
+
+img2.onload = function () {
+  img2.width = img1.width - 50;
+  img2.height = img2.height - 50;
+  canvas.width = img1.width;
+  canvas.height = img1.width;
+  console.log("imagen lista...");
+};
+
+izquierda.onclick = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    img = img1;
+    ctx.drawImage(img, 0, 0);
+};
+
+derecha.onclick = () => {
+    img = img2;
+    ctx.drawImage(img, 0, 0);
 };
 
 color.onclick = () => {
