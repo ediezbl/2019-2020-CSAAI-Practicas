@@ -14,7 +14,7 @@ const derecha = document.getElementById("derecha");
 const color = document.getElementById("colores");
 const gris = document.getElementById("grises");
 const especular = document.getElementById("especular");
-const noespecular = document.getElementById("noespecular");
+const abajo = document.getElementById("abajo");
 const range_value_Rojo = document.getElementById('range_value_Rojo');
 const range_value_Verde = document.getElementById("range_value_Verde");
 const range_value_Azul = document.getElementById("range_value_Azul");
@@ -22,7 +22,8 @@ const range_value_Azul = document.getElementById("range_value_Azul");
 // variables
 var colores = false;
 var img = null;
-
+var modoAbajo = false;
+var modoArriba = false;
 // funciones
 function loadImage(src, imagen){
   imagen.onload = function () {
@@ -111,6 +112,13 @@ function filtroEspecular(){
   ctx.scale(-1,1);
   ctx.drawImage(img, 0, 0);
 }
+
+function filtroAbajo(){
+  ctx.translate(0,2*(canvas.height/2));
+  ctx.scale(1,-1);
+  ctx.drawImage(img, 0, 0);
+}
+
 function deslizador(color, deslizador, range_value){
     deslizador.oninput = () => {
       if(colores){
@@ -154,8 +162,13 @@ especular.onclick = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   filtroEspecular();
 };
-noespecular.onclick = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  filtroEspecular();
-}
+
+abajo.onclick = () => {
+  modoAbajo = true;
+  if(modoAbajo){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    filtroAbajo();
+  }
+};
+
 console.log("Fin...");
