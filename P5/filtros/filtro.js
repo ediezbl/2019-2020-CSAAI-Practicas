@@ -1,4 +1,5 @@
 
+// JavaScript by Eduardo Diez Blanco
 console.log("Ejecutando JS....");
 
 // constantes
