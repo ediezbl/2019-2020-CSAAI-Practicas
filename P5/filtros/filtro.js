@@ -13,6 +13,8 @@ const izquierda = document.getElementById("izquierda");
 const derecha = document.getElementById("derecha");
 const color = document.getElementById("colores");
 const gris = document.getElementById("grises");
+const especular = document.getElementById("especular");
+const noespecular = document.getElementById("noespecular");
 const range_value_Rojo = document.getElementById('range_value_Rojo');
 const range_value_Verde = document.getElementById("range_value_Verde");
 const range_value_Azul = document.getElementById("range_value_Azul");
@@ -66,14 +68,14 @@ function filtroRojo(data){
 
 function filtroVerde(data){
   for (let i = 0; i < data.length; i+=4) {
-    if(data[i + 2] > umbral){
-      data[i + 2] = umbral;
+    if(data[i + 1] > umbral){
+      data[i + 1] = umbral;
     }
     if(data[i] > deslizadorRojo.value){
       data[i] = deslizadorRojo.value;
     }
-    if(data[i] > deslizadorVerde.value){
-      data[i + 1] = deslizadorVerde.value;
+    if(data[i + 2] > deslizadorAzul.value){
+      data[i + 2] = deslizadorAzul.value;
     }
   }
 }
@@ -104,6 +106,11 @@ function filtroGris(){
   ctx.putImageData(imgData, 0, 0);
 };
 
+function filtroEspecular(){
+  ctx.translate(2*(canvas.width/2),0);
+  ctx.scale(-1,1);
+  ctx.drawImage(img, 0, 0);
+}
 function deslizador(color, deslizador, range_value){
     deslizador.oninput = () => {
       if(colores){
@@ -143,5 +150,12 @@ gris.onclick = () => {
     filtroGris();
   }
 };
-
+especular.onclick = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  filtroEspecular();
+};
+noespecular.onclick = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  filtroEspecular();
+}
 console.log("Fin...");
