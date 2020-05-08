@@ -22,8 +22,6 @@ const range_value_Azul = document.getElementById("range_value_Azul");
 // variables
 var colores = false;
 var img = null;
-var modoAbajo = false;
-var modoArriba = false;
 // funciones
 function loadImage(src, imagen){
   imagen.onload = function () {
@@ -53,6 +51,20 @@ function elegirImagen(boton,src){
     }
   };
 }
+function elegirFiltro(boton, src){
+  boton.onclick = () => {
+    if(src == "color"){
+      filtroColores();
+    } else if (src == "gris"){
+      filtroGris();
+    } else if (src == "especular"){
+      filtroEspecular();
+    } else if (src == "abajo"){
+      filtroAbajo();
+    }
+  };
+}
+
 function filtroRojo(data){
   for (let i = 0; i < data.length; i+=4) {
     if (data[i] > umbral){
@@ -94,26 +106,39 @@ function filtroAzul(data){
     }
   }
 }
-function filtroGris(){
-  let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  let data = imgData.data;
+function filtroColores(){
+  colores = true;
   ctx.drawImage(img, 0,0);
-  for (let i = 0; i < data.length; i+=4) {
-    brillo = (3 * data[i] + 4 * data[i + 1] + data[i + 2])/8
-    data[i] = brillo;
-    data[i + 1] = brillo;
-    data[i + 2] = brillo;
+  deslizador("rojo", deslizadorRojo, range_value_Rojo);
+  deslizador("verde", deslizadorVerde, range_value_Verde);
+  deslizador("azul", deslizadorAzul, range_value_Azul);
+}
+
+function filtroGris(){
+  colores = false;
+  if(!colores){
+    let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    let data = imgData.data;
+    ctx.drawImage(img, 0,0);
+    for (let i = 0; i < data.length; i+=4) {
+      brillo = (3 * data[i] + 4 * data[i + 1] + data[i + 2])/8
+      data[i] = brillo;
+      data[i + 1] = brillo;
+      data[i + 2] = brillo;
+    }
+    ctx.putImageData(imgData, 0, 0);
   }
-  ctx.putImageData(imgData, 0, 0);
 };
 
 function filtroEspecular(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.translate(2*(canvas.width/2),0);
   ctx.scale(-1,1);
   ctx.drawImage(img, 0, 0);
 }
 
 function filtroAbajo(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.translate(0,2*(canvas.height/2));
   ctx.scale(1,-1);
   ctx.drawImage(img, 0, 0);
@@ -144,31 +169,8 @@ function deslizador(color, deslizador, range_value){
  loadImage("imagen2", img2);
  elegirImagen(izquierda, "izquierda");
  elegirImagen(derecha, "derecha");
-color.onclick = () => {
-    colores = true;
-    ctx.drawImage(img, 0,0);
-    deslizador("rojo", deslizadorRojo, range_value_Rojo);
-    deslizador("verde", deslizadorVerde, range_value_Verde);
-    deslizador("azul", deslizadorAzul, range_value_Azul);
-  };
-
-gris.onclick = () => {
-  colores = false;
-  if(!colores){
-    filtroGris();
-  }
-};
-especular.onclick = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  filtroEspecular();
-};
-
-abajo.onclick = () => {
-  modoAbajo = true;
-  if(modoAbajo){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    filtroAbajo();
-  }
-};
-
+ elegirFiltro(color,"color");
+ elegirFiltro(gris,"gris");
+ elegirFiltro(especular,"especular");
+ elegirFiltro(abajo,"abajo");
 console.log("Fin...");
