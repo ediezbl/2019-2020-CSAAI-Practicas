@@ -51,6 +51,7 @@ function elegirImagen(boton,src){
     }
   };
 }
+
 function elegirFiltro(boton, src){
   boton.onclick = () => {
     if(src == "color"){
@@ -101,11 +102,12 @@ function filtroAzul(data){
     if(data[i] > deslizadorRojo.value){
       data[i] = deslizadorRojo.value;
     }
-    if(data[i] > deslizadorVerde.value){
+    if(data[i + 1] > deslizadorVerde.value){
       data[i + 1] = deslizadorVerde.value;
     }
   }
 }
+
 function filtroColores(){
   colores = true;
   ctx.drawImage(img, 0,0);
