@@ -1,3 +1,2 @@
 # Práctica 1: CV
-
-holaa
+Mi curriculum esta en: https://ediezbl.github.io/2019-2020-CSAAI-Practicas/P1/
