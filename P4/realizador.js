@@ -19,7 +19,7 @@ const noLoop = document.getElementById("noloop");
 // variables
 var normalState = false;
 var modeLoop = false;
-var pruebas = false;
+var poster = false;
 var num_vid = 1;
 var auto_interval;
 var loop_interval;
@@ -42,7 +42,7 @@ function obtain_video_parameters(video, width, height){
 }
 
 function update_videos(video1,video2){
-  video1.src = video2.src;
+  video1.src = video2.src + 0.5;
   video1.currentTime = video2.currentTime;
   video1.play();
 }
@@ -107,23 +107,20 @@ function noLooplogic(){
 }
 
 function restartPoster(){
-  pruebas = false;
-  if(pruebas == false){
+  poster = false;
+  if(poster == false){
     video1.poster = "barras.png"
   }
 }
 
 function newPoster(){
-  pruebas = true;
-  if(pruebas == true){
+  poster = true;
+  if(poster == true){
     video1.poster = video5.poster;
   }
 }
 
-function botones(){
-  click_Botton(boton1, video1, video2);
-  click_Botton(boton2, video1, video3);
-  click_Botton(boton3, video1, video4);
+function botones () {
   normal.onclick = () => {
     restartPoster();
     normalLogic();
@@ -142,9 +139,11 @@ function botones(){
   };
   boton4.onclick = () => {
     newPoster();
-  }
-};
-
+  };
+  click_Botton(boton1, video1, video2);
+  click_Botton(boton2, video1, video3);
+  click_Botton(boton3, video1, video4);
+}
 // Programa principal
 obtain_video_parameters(video1, 600, 300);
 obtain_video_parameters(video2, 200, 100);

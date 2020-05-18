@@ -1,0 +1,49 @@
+
+p {
+  text-align: center;
+}
+
+#video1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 30%;
+  width: 50%;
+  margin: -15% 0 0 -25%;
+}
+
+#video2 {
+  position: absolute;
+  top: 80%;
+  left: 20%;
+  height: 30%;
+  width: 50%;
+  margin: -15% 0 0 -25%;
+}
+
+#video3 {
+  position: absolute;
+  top: 80%;
+  left: 80%;
+  height: 30%;
+  width: 50%;
+  margin: -15% 0 0 -25%;
+}
+
+#video4 {
+  position: absolute;
+  top: 120%;
+  left: 20%;
+  height: 30%;
+  width: 50%;
+  margin: -15% 0 0 -25%;
+}
+
+#video5 {
+  position: absolute;
+  top: 120%;
+  left: 80%;
+  height: 30%;
+  width: 50%;
+  margin: -15% 0 0 -25%;
+}
