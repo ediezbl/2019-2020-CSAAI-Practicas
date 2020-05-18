@@ -51,6 +51,24 @@ function click_Botton(boton, video1, video2){
   boton.onclick = () => {
     if(normalState == true){
       update_videos(video1,video2);
+      if(video2 == video2){
+        document.getElementById("video2").style.border = "thick solid #0000FF";
+        document.getElementById("video3").style.border = "none";
+        document.getElementById("video4").style.border = "none";
+        document.getElementById("video5").style.border = "none";
+      }
+      if(video2 == video3){
+          document.getElementById("video2").style.border = "none";
+          document.getElementById("video3").style.border = "thick solid #0000FF";
+          document.getElementById("video4").style.border = "none";
+          document.getElementById("video5").style.border = "none";
+      }
+      if(video2 == video4){
+        document.getElementById("video2").style.border = "none";
+        document.getElementById("video3").style.border = "none";
+        document.getElementById("video4").style.border = "thick solid #0000FF";
+        document.getElementById("video5").style.border = "none";
+      }
     }
   };
 }
@@ -118,6 +136,10 @@ function newPoster(){
   if(poster == true){
     video1.poster = video5.poster;
   }
+  document.getElementById("video2").style.border = "none";
+  document.getElementById("video3").style.border = "none";
+  document.getElementById("video4").style.border = "none";
+  document.getElementById("video5").style.border = "thick solid #0000FF";
 }
 
 function botones () {
@@ -144,6 +166,7 @@ function botones () {
   click_Botton(boton2, video1, video3);
   click_Botton(boton3, video1, video4);
 }
+
 // Programa principal
 obtain_video_parameters(video1, 600, 300);
 obtain_video_parameters(video2, 200, 100);
